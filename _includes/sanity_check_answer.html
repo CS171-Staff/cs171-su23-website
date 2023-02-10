@@ -1,0 +1,20 @@
+<div class="sanity-check-answer-container">
+
+<button onclick="{{ include.question-name }}Show()">Show answer</button>
+
+<div id="{{ include.question-name }}" style="display:none;">
+{{ include.answer | markdownify }}
+</div>
+
+<script>
+function {{ include.question-name }}Show() {
+  var x = document.getElementById("{{ include.question-name }}");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+</div>

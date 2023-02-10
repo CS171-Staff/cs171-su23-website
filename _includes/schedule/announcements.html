@@ -1,0 +1,43 @@
+<strong>Announcements</strong> <button onclick="showPastAnnouncements()">Show/hide past announcements</button>
+
+{%- comment -%}
+The "announcements" variable, as declared in announcements.yml, is an array. Each element of the array has two fields: "date" and "content", listing the date the announcement was made and the content of the announcement (in Markdown).
+
+In here, we ensure that the most recent announcement is always shown by sorting by descending date, and showing the 0th element of the array. If you want to show a custom announcement, you can remove the sort and reverse operators, and remove the hardcoded 0-index.
+{%- endcomment -%}
+
+{%- assign announcements = site.data.schedule.announcements | sort: "date" | reverse -%}
+{{ announcements[0].content | markdownify }}
+
+{%- comment -%}
+Optionally show all past announcements. Slice off the 0th announcement in the array (assuming that one is displayed by default), format all other announcements in the array, and put them in a tag with the past-announcement class.
+
+The JS toggle changes the display style of the past-announcement class, which should only be used in this file.
+{%- endcomment -%}
+
+{%- assign old_announcements = announcements | shift -%}
+<div class="past-announcement" style="display:none">
+<h3>Past Announcements</h3>
+{%- if old_announcements.size == 0 -%}
+None for now!
+{%- endif -%}
+{%- for announcement in old_announcements -%}
+<strong>{{ announcement.date }}:</strong>
+{{ announcement.content | markdownify }}
+{%- endfor -%}
+</div>
+
+<script>
+function showPastAnnouncements() {
+  var x = document.getElementsByClassName("past-announcement");
+  var i;
+  for (i = 0; i < x.length; i++) {
+    if (x[i].style.display === "none") {
+      x[i].style.display = "block";
+      x[i].style = "padding:5px; border:1px solid black;"
+    } else {
+      x[i].style.display = "none";
+    }
+  }
+}
+</script>

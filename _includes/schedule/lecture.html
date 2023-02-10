@@ -1,0 +1,28 @@
+{%- if include.item.nolecture -%}
+  {{- include.item.nolecture -}}
+{%- else -%}
+  {%- if include.item.title -%}
+    {{ include.item.number }}. {{ include.item.title }}
+    {%- if include.item.slides or include.item.recording or include.item.readings.size > 0 -%}
+      <ul class="schedule__lecture__reading-list">
+        {%- if include.item.slides -%}
+          <li><a href="{{ include.item.slides }}">Slides</a></li>
+        {%- endif -%}
+        {%- if include.item.recording -%}
+          <li><a href="{{ include.item.recording }}">Recording</a></li>
+        {%- endif -%}
+        {%- for reading in include.item.readings -%}
+          <li
+            ><a href="{{ reading.link }}">
+              {%- if reading.textbook -%}
+                Ch. {{ reading.textbook }}
+              {%- else -%}
+                {{ reading.name }}
+              {%- endif -%}
+            </a
+          ></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}

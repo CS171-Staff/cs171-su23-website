@@ -1,0 +1,114 @@
+---
+title: Calendar
+order: 1
+---
+
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  <head>
+    {%- include head.html -%}
+    <script src="/assets/calendar.js"></script>
+    <link rel="stylesheet" href="/assets/calendar.css">
+  </head>
+
+  <body>
+
+    {%- include header.html -%}
+
+    {%- include warn_if_not_live.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="alert-warning">
+          <strong>Note:</strong> This schedule is tentative; some times might change slightly, though we don't anticipate major changes.
+        </div>
+        <div><br></div>
+
+        All times on this calendar should be displayed in Pacific time.
+        <div><br></div>
+
+        <a href="{{ site.data.calendar.google_calendar_link }}">Google Calendar link</a>
+        <div><br></div>
+
+        <noscript>Please enable Javascript in order to see the Calendar.</noscript>
+        <div id='calendar'></div>
+        <script type='text/javascript'>
+/* On smaller screens, we display a day by day view. */
+var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ 'googleCalendar', 'dayGrid', 'timeGrid' ],
+    googleCalendarApiKey: '{{ site.data.calendar.google_api_key }}',
+    events: {
+      googleCalendarId: '{{ site.data.calendar.google_calendar_id }}',
+    },
+    eventClick: function (e) { e.preventDefault(); },
+    eventRender: function (info) {
+      // Stop from clicking Google Calendar
+      info.el.removeAttribute('href');
+
+      var titleEl = info.el.querySelector('.fc-title');
+      var eventLocation = info.event.extendedProps.location;
+      if (typeof eventLocation !== 'undefined') {
+        /* Google Calendar will return the "Location" we put, but also a list
+           of rooms we reserved (separated by commas).  This looks quite
+           ugly--so if there are multiple locations we will only show the
+           first one.  */
+        eventLocation = eventLocation.split(', ')[0];
+        titleEl.innerText += ' @ ' + eventLocation;
+      }
+      titleEl.innerText = titleEl.innerText.replace('{{ site.data.calendar.remove_prefix }}', '');
+
+      var titleText = titleEl.innerText;
+      {% for event_type in site.data.calendar.event_types %}
+      if (titleText.includes('{{ event_type.needle }}')) {
+        info.el.style.backgroundColor = '{{ event_type.color }}';
+        info.el.style.borderColor = '{{ event_type.color }}';
+        info.el.style.color = '{{ event_type.text_color }}';
+      }
+      {% endfor %}
+
+      var detailedTitleText = titleText;
+      var eventDescription = info.event.extendedProps.description;
+      if (typeof eventDescription !== 'undefined') {
+        detailedTitleText += '. ' + eventDescription;
+      }
+
+      var tooltip = new Tooltip(info.el, {
+        title: detailedTitleText,
+        placement: 'top',
+        trigger: 'hover',
+        container: 'body'
+      });
+    },
+    eventTextColor: '#fff',
+    allDaySlot: false,
+    nowIndicator: true,
+    header: {
+        left: 'timeGridWeek,timeGridDay',
+        center: '',
+        right: 'prev,next'
+    },
+    views: {
+        timeGridWeek: {
+            duration: { weeks: 1 }
+        },
+    },
+    hiddenDays: [0, 6],
+    defaultView: isMobile ? 'timeGridDay' : 'timeGridWeek',
+    height: 'auto',
+    minTime: '{{ site.data.calendar.min_time }}',
+    maxTime: '{{ site.data.calendar.max_time }}',
+    timeZone: '{{ site.timezone }}'
+  });
+  calendar.render();
+});
+        </script>
+      </div>
+    </main>
+  </body>
+
+</html>

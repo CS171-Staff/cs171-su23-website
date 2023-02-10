@@ -1,0 +1,15 @@
+{%- if include.item -%}
+  {% include link_if_exists.html path=include.item.link url=include.item.url name=include.item.name always_show=true %}
+  {% include link_if_exists.html path=include.item.sols name="<br>(solutions)" %}
+  {% capture recording_content %}
+    {%- if include.item.recording -%}
+      <br><a href="{{ include.item.recording }}">(recording)</a>
+    {%- endif -%}
+  {% endcapture %}
+  {% include if_path_exists.html path=include.item.sols content=recording_content %}
+  {% include link_if_exists.html path=include.item.examprep_link name='<br><span class="schedule__discussion--examprep">Exam Prep</span>' %}
+  {% include link_if_exists.html path=include.item.examprep_sols name='<br><span class="schedule__discussion--examprep">(solutions)</span>' %}
+  {%- if include.item.examprep_recording -%}
+    <br><span class="schedule__discussion--examprep"><a href="{{ include.item.examprep_recording }}">(recording)</a></span>
+  {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,31 @@
+{%- assign found_it = false -%}
+
+{%- if include.url -%}
+  <a href="{{ include.url }}">{{ include.name }}</a>
+
+{%- else -%}
+  {%- if include.path -%}
+    {%- for page in site.static_files -%}
+      {%- if page.path == include.path -%}
+        <a href="{{ page.path }}">{{ include.name }}</a>
+        {%- assign found_it = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if found_it == false -%}
+      {%- for page in site.pages -%}
+        {%- if page.title == include.path -%}
+          <a href="{{ page.permalink }}">{{ include.name }}</a>
+          {%- assign found_it = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if include.always_show -%}
+    {%- if found_it == false -%}
+      {{ include.name }}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}

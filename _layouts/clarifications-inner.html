@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  <head>
+    {%- include style.html -%}
+    <script type="text/javascript">
+      setInterval(async () => {
+        let res = await fetch(window.location.href);
+        let fetchedText = await res.text();
+        let fetchedDoc = document.createElement('html');
+        fetchedDoc.innerHTML = fetchedText;
+        let hasChanged = document.querySelector('body').innerHTML !== fetchedDoc.querySelector('body').innerHTML;
+        if (hasChanged) {
+          location.reload();
+        }
+      }, 10000);
+    </script>
+  </head>
+
+  <body style="min-height: unset; background: none">
+    {{ content }}
+  </body>
+
+</html>

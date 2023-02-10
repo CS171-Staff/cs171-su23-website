@@ -1,0 +1,36 @@
+<div class="staff-container">
+  {%- for staff in include.portrait_list -%}
+    <div class="staff-portrait">
+      <img src="/assets/images/staff/{{ staff.image }}" alt="{{ staff.name }} portrait" height=200>
+      <p class="staff-name">
+                            {%- if staff.website -%}
+                              <a href="{{ staff.website }}">{{ staff.name }}</a>
+                            {%- else -%}
+                              {{ staff.name }}
+                            {%- endif -%}
+
+                            {%- assign tags = '' | split: '' -%}
+                            {%- if staff.head -%}
+                              {%- assign tags = tags | push: 'Head' -%}
+                            {%- endif -%}
+                            {%- if staff.dsp -%}
+                              {%- assign tags = tags | push: 'DSP' -%}
+                            {%- endif -%}
+                            {%- assign lines = '' | split: '' -%}
+                            {%- if staff.pronouns -%}
+                              {%- assign lines = lines | push: staff.pronouns -%}
+                            {%- endif -%}
+                            {%- if tags.size > 0 -%}
+                              {%- assign tags_line = tags | join: ', ' -%}
+                              {%- assign lines = lines | push: tags_line -%}
+                            {%- endif -%}
+                            {%- if lines.size > 0 -%}
+                              <br>{{ lines | join: ' - ' }}
+                            {%- endif -%}
+
+                            {%- if staff.email -%}
+                              <br>{{ staff.email }}
+                            {%- endif -%}
+    </div>
+  {%- endfor -%}
+</div>

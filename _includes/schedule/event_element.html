@@ -1,0 +1,7 @@
+<td class="schedule__event-elem">
+  {%- if include.item.link -%}
+    <a href="{{ include.item.link }}">{{ include.item.title }}</a>
+  {%- else -%}
+    {{ include.item.title }}
+  {%- endif -%}
+</td>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+  <head>
+    <meta http-equiv="refresh" content="0; url={{ page.redirect_to }}" />
+    <script>
+    window.location = "{{ page.redirect_to }}";
+    </script>
+    <link rel="canonical" href="{{ page.redirect_to }}"/>
+  </head>
+
+  <body>
+    <p><a href="{{ page.redirect_to }}">Click here to be redirected.</a></p>
+  </body>
+
+</html>

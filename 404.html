@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+<style type="text/css" media="screen">
+  .container {
+    margin: 10px auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  h1 {
+    margin: 30px 0;
+    font-size: 7em;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .column {
+    float: left;
+    width: 50%;
+  }
+  .container {
+    top: 50%;
+  }
+</style>
+<div class="row">
+  <div class="column"><img src="/assets/images/404.png" width=100%></div>
+  <div class="column">
+    <div class="container">
+      <h1>404</h1>
+      <script>
+      (function () {
+      var el404 = document.getElementById('error-404');
+      el404.innerText = el404.innerText.replace('404', decodeURIComponent(window.location.pathname));
+      })();
+      </script>
+    <div>
+  </div>
+</div>

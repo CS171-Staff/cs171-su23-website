@@ -1,0 +1,30 @@
+title: CS 171 Summer 2023
+email: cs171-staff@berkeley.edu
+description: >-
+  CS 171: Cryptography
+baseurl: ""
+timezone: America/Los_Angeles
+
+live: false
+
+markdown: kramdown
+theme: minima
+
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+
+header_pages:
+  - calendar.html
+  - resources.md
+  - oh.md
+  - extensions.md
+  - staff.html
+  - policies.md
+
+include:
+  - .well-known

@@ -1,0 +1,30 @@
+{%- comment -%}
+Maintain a list assignment_stack, which keeps track of outstanding assignments
+which are not yet due. This allows us to have due dates on the homepage aligned
+with when the assignments are due.
+{%- endcomment -%}
+
+{%- assign empty_list = "" | split: "" -%}
+{%- assign assignment_stack = assignment_stack | default: empty_list -%}
+
+{%- assign next_date_idx = idx | plus: 1 -%}
+{%- assign next_date = valid_dates[next_date_idx] | date: '%j' -%}
+
+{%- assign empty_list = "" | split: "" -%}
+{%- assign new_assignment_stack = empty_list -%}
+{%- for assignment in assignment_stack -%}
+  {%- assign due_date = assignment.due_date | date: '%j' -%}
+  {%- if due_date < next_date -%}
+    {{ assignment.name }} due ({{ assignment.due_date | date: '%a&nbsp;%m/%d' }})
+  {%- else -%}
+    {%- assign new_assignment_stack = new_assignment_stack | push: assignment -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign assignment_stack = new_assignment_stack -%}
+
+{%- if include.item -%}
+  {%- for assignment in include.item -%}
+    {{ assignment.name }} released (due {{ assignment.due_date | date: '%a&nbsp;%m/%d' }})
+    {%- assign assignment_stack = assignment_stack | push: assignment -%}
+  {%- endfor -%}
+{%- endif -%}

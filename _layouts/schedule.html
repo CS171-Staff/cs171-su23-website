@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if site.description -%}
+  <h1 class="page-heading">{{ site.description }}</h1>
+  {%- endif -%}
+
+  <p>
+     {%- include schedule/announcements.html -%}
+  </p>
+
+  <p>
+    {%- comment -%}
+      Liquid's pluralize filter doesn't work in Jekyll
+    {%- endcomment -%}
+
+    <strong>
+      Instructor{%- if site.data.staff.instructors.size > 1 -%}s{%- endif -%}:
+    </strong>
+    {{ site.data.staff.instructors | map: 'name' | array_to_sentence_string }}
+  </p>
+
+  <p><strong>Lecture:</strong> {{ site.data.schedule.lecture_time | markdownify }}</p>
+  
+  {%- include schedule/agenda.html -%}
+</div>

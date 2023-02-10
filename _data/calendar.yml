@@ -1,0 +1,32 @@
+# Follow the steps on https://fullcalendar.io/docs/v4/google-calendar until "Getting Set Up" to obtain the google_calendar_id.
+
+google_api_key: 
+google_calendar_id: 
+google_calendar_link: 
+min_time: '08:00:00'
+max_time: '20:00:00'
+
+event_types:
+  - needle: '' # default
+    color: '#0a8043'
+    text_color: '#ffffff'
+  - needle: Discussion
+    color: '#35798c'
+    text_color: '#ffffff'
+  - needle: Hybrid Discussion
+    color: '#49a7c2'
+    text_color: '#ffffff'
+  - needle: Online Discussion
+    color: '#61dcff'
+    text_color: '#111111'
+  - needle: Office Hours
+    color: '#994963'
+    text_color: '#ffffff'
+  - needle: Online Office Hours
+    color: '#ff7aa5'
+    text_color: '#111111'
+  - needle: Lecture
+    color: '#123640'
+    text_color: '#ffffff'
+
+remove_prefix: "[CS 171]"

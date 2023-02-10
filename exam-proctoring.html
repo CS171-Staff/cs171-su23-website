@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Exam Clarifications</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+      $(document).ready(() => {
+        const timerEl = $("#timer");
+        const buttonEl = $("#button");
+        const timerSetEl = $("#timer-set");
+
+        function padZeros(n) {
+          return ("00" + n).slice(-2);
+        }
+
+        function timeRemainingToString(timeRemaining) {
+          const msInSecond = 1000;
+          const msInMinute = 60 * msInSecond;
+          const msInHour = 60 * msInMinute;
+
+          const hoursRemaining = Math.floor(timeRemaining / msInHour);
+          const minutesRemaining = Math.floor((timeRemaining % msInHour) / msInMinute);
+          const secondsRemaining = Math.floor((timeRemaining % msInMinute) / msInSecond);
+
+          return `${hoursRemaining}:${padZeros(minutesRemaining)}:${padZeros(secondsRemaining)}`;
+        }
+
+        timerEl.draggable();
+        timerEl.hide();
+
+        buttonEl.click(() => {
+          timerSetEl.hide();
+          buttonEl.hide();
+          timerEl.show();
+
+          const lengthInMinutes = timerSetEl.val();
+          const startTime = new Date().getTime();
+          const msInMinute = 60 * 1000;
+          const endTime = startTime + lengthInMinutes * msInMinute;
+
+          const updateTimer = setInterval(() => {
+            const currentTime = new Date().getTime();
+            const timeRemaining = endTime - currentTime;
+
+            if (timeRemaining > 0) {
+              timerEl.text(timeRemainingToString(timeRemaining));
+            } else {
+              clearInterval(updateTimer);
+              timerEl.text("0:00:00");
+              timerEl.addClass("expired");
+
+              setInterval(() => timerEl.toggleClass("blink"), 500);
+            }
+          }, 250);
+        });
+
+        // Warn if page wants to reload.
+        window.onbeforeunload = function() {
+          return "";
+        }
+      });
+    </script>
+    <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .announce {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+    }
+
+    #timer-set, #timer {
+      border: solid 3px black;
+      padding: 25px;
+      font-size: 72px;
+      display: inline-block;
+      position: fixed;
+      top: 0px;
+      background-color: white;
+      font-family: "Inconsolata", monospace;
+      cursor:default;
+      margin: 0px;
+    }
+
+    #timer.expired {
+      color: red;
+    }
+
+    #timer.blink {
+      color: white !important;
+    }
+
+    #button {
+      border: solid 3px black;
+      padding: 25px;
+      font-size: 36px;
+      display: inline-block;
+      position: fixed;
+      bottom: 0px;
+      background-color: white;
+      font-family: "Inconsolata", monospace;
+      cursor:default;
+    }
+    </style>
+  </head>
+  <body>
+    <iframe class="announce"
+      src="https://docs.google.com/document/d/1ExsN6pcFK6BjDd6TMp958kI1q1vdlwI05-bmaaGdrWk/edit?rm=minimal">
+    </iframe>
+
+    <div>
+      <p id="timer"></p>
+      <input placeholder="# minutes" id="timer-set">
+    </div>
+    <div id="button">START</div>
+  </body>
+</html>

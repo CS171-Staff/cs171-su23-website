@@ -1,0 +1,18 @@
+---
+title: Staff
+layout: default
+order: 2
+---
+
+{% if site.data.staff.instructors %}
+  <h2>Instructors</h2>
+  {% include portraits.html portrait_list=site.data.staff.instructors %}
+{% endif %}
+{% if site.data.staff.tas %}
+  <h2>TAs</h2>
+  {% include portraits.html portrait_list=site.data.staff.tas %}
+{% endif %}
+{% if site.data.staff.readers %}
+  <h2>Readers</h2>
+  {% include portraits.html portrait_list=site.data.staff.readers %}
+{% endif %}

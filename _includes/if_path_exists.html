@@ -1,0 +1,22 @@
+{%- assign found_it = false -%}
+
+{%- if include.path -%}
+  {%- for page in site.static_files -%}
+    {%- if page.path == include.path -%}
+      {%- assign found_it = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if found_it == false -%}
+    {%- for page in site.pages -%}
+      {%- if page.title == include.path -%}
+        {%- assign found_it = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if found_it -%}
+  {{ include.content }}
+{%- endif -%}

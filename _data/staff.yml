@@ -1,0 +1,19 @@
+# Each staff member has the following format:
+# - name: Required. A string for the staff's name.
+#   image: Required. A string URL (relative or absolute) to the staff's image.
+#   pronouns: A string for the staff's pronouns.
+#   email: A string for the staff's email.
+#   website: A string for the staff's personal website.
+#   dsp: A boolean indicating whether the staff has access to DSP data.
+#   head: A boolean indicating whether the staff should be indicated as a head
+#         staff member.
+
+instructors:
+  - name: Ryan Cottone
+    image: ryan.jpg
+    pronouns: he/him
+    email: rcottonea@
+  - name: Imran Khaliq-Baporia
+    image: imran.jpeg
+    pronouns: he/him
+    email: imran.khaliq@

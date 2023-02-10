@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  <head>
+    {%- include head.html -%}
+  </head>
+
+  <body>
+
+    {%- include header.html -%}
+
+    {%- include warn_if_not_live.html -%}
+
+    <main class="page-content" style="background-color: pink;" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+  </body>
+
+</html>

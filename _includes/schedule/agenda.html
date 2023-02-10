@@ -1,0 +1,197 @@
+{%- comment -%}
+The syntax to create an empty list in Jekyll is a little weird, so we do it
+once here. Note that lists are immutable, so we don't need to worry about
+issues caused by reusing this variable.
+{%- endcomment -%}
+{%- assign EMPTY_LIST = "" | split: "" -%}
+
+{%- comment -%}
+  To create a skip to current week functionality, we use HTML anchors.
+{%- endcomment -%}
+<p><a href="#week-{{ 'now' | date: '%U' }}">Skip to current week</a></p>
+
+<div>
+  <table class="schedule">
+    <thead>
+      <th>Date</th>
+      <th>Lecture</th>
+      <th>Discussion</th>
+      <th>HW</th>
+    </thead>
+
+    <tbody>
+    {%- comment -%}
+      Hack to iterate through dates: put everything into Unix epoch time,
+      convert to days since epoch, iterate over that, and then convert back.
+
+      We want to determine the dates dynamically. An alternative would be to
+      hardcode the date with each agenda item, but this would mean that we
+      would need to change many dates every time we insert or remove an item.
+
+      TODO: this is incorrect, because of timezones and leap seconds.
+      Does it actually matter?
+    {%- endcomment -%}
+
+    {%- assign start_epoch = site.data.schedule.start_date | date: '%s' -%}
+    {%- assign end_epoch = site.data.schedule.end_date | date: '%s' -%}
+    {%- assign seconds_in_day = 60 | times: 60 | times: 24 -%}
+    {%- assign start_days_epoch = start_epoch | divided_by: seconds_in_day -%}
+    {%- assign end_days_epoch = end_epoch | divided_by: seconds_in_day -%}
+
+    {%- comment -%}
+      Get all days we have class on. Note that using where_exp doesn't quite
+      work due to syntax issues, so we resort to a manual forloop instead.
+    {%- endcomment -%}
+    {%- assign valid_dates = EMPTY_LIST -%}
+    {%- for days_epoch in (start_days_epoch..end_days_epoch)-%}
+      {%- assign date = days_epoch | times: seconds_in_day -%}
+      {%- assign day_of_week = date | date: '%w' -%}
+      {%- if site.data.schedule.class_days contains day_of_week -%}
+        {%- assign valid_dates = valid_dates | push: date -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%}
+      Merge the agenda and events into a single schedule. The schedule is a
+      list of tuples: the first element is the date, the second is a rendered
+      HTML blob.
+    {%- endcomment -%}
+    {%- assign schedule = EMPTY_LIST -%}
+    {%- for date in valid_dates -%}
+      {%- assign date_item_tuple = EMPTY_LIST -%}
+      {%- assign date_item_tuple = date_item_tuple | push: date -%}
+
+      {%- assign item = site.data.schedule.agenda[forloop.index0] -%}
+      {%- capture rendered_item -%}
+      <td>{%- include schedule/lecture.html item=item -%}</td>
+      {%- endcapture -%}
+      {%- assign date_item_tuple = date_item_tuple | push: rendered_item -%}
+
+      {%- assign schedule = schedule | push: date_item_tuple -%}
+    {%- endfor -%}
+
+    {%- for item in site.data.schedule.events -%}
+      {%- assign date_item_tuple = EMPTY_LIST -%}
+      {%- assign date_item_tuple = date_item_tuple | push: item.date -%}
+
+      {%- capture rendered_item -%}
+      {%- include schedule/event_element.html item=item -%}
+      {%- endcapture -%}
+      {%- assign date_item_tuple = date_item_tuple | push: rendered_item -%}
+
+      {%- assign schedule = schedule | push: date_item_tuple -%}
+    {%- endfor -%}
+
+    {%- comment -%}
+      Sort the schedule by date, then group by week. This is long because
+      Jekyll lacks something like "sort_by_exp", so we emulate it via
+      group_by_exp, sort, and a flatten.
+    {%- endcomment -%}
+
+    {%- assign nested_sorted_schedule = schedule | group_by_exp: "it", "it[0] | date_to_xmlschema" | sort: "name" -%}
+    {%- assign sorted_schedule = EMPTY_LIST -%}
+    {%- for date_and_sublist in nested_sorted_schedule -%}
+      {%- for item in date_and_sublist.items -%}
+        {%- assign sorted_schedule = sorted_schedule | push: item -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    
+    {%- assign schedule_by_week = sorted_schedule | group_by_exp: "it", "it[0] | date: '%U'" | sort: "name" -%}
+
+    {%- assign week_lengths = "" | split: ',' -%}
+    {%- for schedule_for_week in schedule_by_week -%}
+      {%- assign school_week = forloop.index0 -%}
+      {%- assign week_length = schedule_by_week[school_week].items | size -%}
+      {%- assign week_lengths = week_lengths | push: week_length -%}
+    {%- endfor -%}
+
+
+    {%- assign homework_index = 0 -%}
+    {%- assign homework_week_count = 1 -%}
+    {%- assign homework_week_target = 1 -%}
+
+    {%- assign discussion_number = 0 -%}
+    {%- for schedule_for_week in schedule_by_week -%}
+      {%- assign early_done = 0 -%}
+      {%- assign late_done = 0 -%}
+      {%- assign school_week = forloop.index0 -%}
+      {%- assign week_no = schedule_for_week.name -%}
+      {%- assign items = schedule_for_week.items -%}
+      {%- capture row_alternating %}{% cycle '', 'is-even' %}{%- endcapture -%}
+      {%- assign early_week = 0 -%}
+      {%- assign late_week = 0 -%}
+      {%- for item in items -%}
+        {%- assign date = item[0] -%}
+        {%- assign day_of_week = date | date: '%u' -%}
+        {%- if day_of_week == '1' or day_of_week == '2' -%}
+          {%- assign early_week = early_week | plus:1 -%}
+        {%- else -%}
+          {%- assign late_week = late_week | plus:1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for item in items -%}
+        {%- assign date = item[0] -%}
+        {%- assign rendered_item = item[1] -%}
+        <tr class="{{ row_alternating }}">
+          <td>{{ date | date: '%a<br>%m/%d' }}</td>
+          {{ rendered_item }}
+          {%- assign day_of_week = date | date: '%u' -%}
+
+          {%- if site.data.schedule.summer -%}
+            {%- if day_of_week == '1' and early_done == 0 -%}
+              {%- assign discussion = site.data.schedule.discussions[discussion_number] -%}
+              {%- assign discussion_number = discussion_number | plus:1 -%}
+              {%- assign early_done = early_done | plus:1 -%}
+              <td rowspan="{{ early_week }}" id="week-{{ week_no }}">
+                {%- include schedule/discussion.html item=discussion -%}
+              </td>
+            {%- endif -%}
+            {%- if day_of_week == '3' and late_done == 0 -%}
+              {%- assign discussion = site.data.schedule.discussions[discussion_number] -%}
+              {%- assign discussion_number = discussion_number | plus:1 -%}
+              {%- assign late_done = late_done | plus:1 -%}
+              <td rowspan="{{ late_week }}" id="week-{{ week_no }}">
+                {%- include schedule/discussion.html item=discussion -%}
+              </td>
+            {%- endif -%}
+          {%- else -%}
+            {%- if forloop.first -%}
+              {%- assign discussion = site.data.schedule.discussions[school_week] -%}
+              <td rowspan="{{ forloop.length }}" id="week-{{ week_no }}">
+                {%- include schedule/discussion.html item=discussion -%}
+              </td>
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- if forloop.first -%}
+            {%- if homework_week_count == homework_week_target and homework_index <= 6 -%}
+              {%- assign homework_week_target = site.data.schedule.hwlengths[homework_index]["length"] -%}
+
+              {%- assign homework = site.data.schedule.hwlinks[homework_index] -%}
+              {%- assign homework_link = homework.link -%}
+              {%- assign homework_number = homework_index | plus:1 -%}
+
+              {%- assign homework_length = 0 -%}
+              {%- assign homework_week_lengths = week_lengths | slice:school_week, homework_week_target -%}
+              {%- for homework_week_length in homework_week_lengths -%}
+                {%- assign homework_length = homework_length | plus:homework_week_length -%}
+              {%- endfor -%}
+
+              <td rowspan="{{ homework_length }}" id="hw-{{ homework_number }}" class="{{ row_alternating }}">
+                {%- include schedule/homework.html item=homework_link -%}
+              </td>
+
+              {%- assign homework_index = homework_index | plus:1 -%}
+              {%- assign homework_week_count = 1 -%}
+            {%- else -%}
+
+              {%- assign homework_week_count = homework_week_count | plus:1 -%}
+            {%- endif -%}
+          {%- endif -%}
+
+        </tr>
+      {%- endfor -%}
+    {%- endfor -%}
+    </tbody>
+  </table>
+</div>
