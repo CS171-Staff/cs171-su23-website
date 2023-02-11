@@ -11,7 +11,7 @@ order: 3
 
 ## Prerequisites
 
-Since CS 171 is primarily a theoretical computer science course, we require familiar with discrete mathematics (CS 70) and basic programming experience (CS 61A or CS 61B level). A class in algorithms (CS 170) is helpful, but not required. No prior cryptography experience is assumed.
+Since cryptography is fundamentally reliant to both math and programming, we require familiar with discrete mathematics (CS 70) and basic programming experience (CS 61A or CS 61B level). A class in algorithms (CS 170) is helpful, but not required. No prior cryptography experience is assumed.
 
 ## Lecture
 
@@ -35,12 +35,12 @@ We may refer to textbook readings for further study, listed on the website (TBA)
 
 There will be one midterm exam and a final exam. Exams are mandatory and synchronous (everyone takes them at the same time). A remote exam will be offered to those with a valid reason (at the exact same time as the synchronous exam).
 
-* The midterm is on TBD
-* The final exam is on TBD
+* The midterm is on **TBD**
+* The final exam is on **TBD**
 
 ## Homeworks
 
-There will be 8 homeworks, released weekly and due Sunday at midnight. These problem sets will cover the material for that week's lectures, and will be submitted to Gradescope. **We strongly recommend typesetting homework (e.g. in Latex), or at least having legible handwriting. Points will be deducted for poorly readable submissions.**
+There will be 8 homeworks, released weekly and due Sunday at midnight. These problem sets will cover the material for that week's lectures, and will be submitted to Gradescope. **We strongly recommend typesetting homework (e.g. in LaTeX), or at least having legible handwriting. Points will be deducted for poorly readable submissions.**
 
 We will automatically drop your lowest homework score.
 
