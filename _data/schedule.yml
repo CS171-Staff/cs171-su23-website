@@ -91,7 +91,7 @@ agenda:
   - number: 10
     title: Hash Functions in Practice, Birthday Attacks, Rainbow Tables
   - number: 11
-    title: Message Authentication Codes, Security for MACs, CBC-MAC
+    title: Message Authentication Codes, Security and Construction of MACs
   - number: 12
     title: Authenticated Encryption, AES-GCM
   - number: 13
