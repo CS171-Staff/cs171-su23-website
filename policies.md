@@ -11,7 +11,7 @@ order: 3
 
 ## Prerequisites
 
-Since CS 171 is primarily a theoretical computer science course, we require familiar with discrete mathematics (CS 70) and basic programming experience (CS 61A, CS 61B). A class in algorithms (CS 170) is helpful, but not required. No prior cryptography experience is assumed.
+Since CS 171 is primarily a theoretical computer science course, we require familiar with discrete mathematics (CS 70) and basic programming experience (CS 61A or CS 61B level). A class in algorithms (CS 170) is helpful, but not required. No prior cryptography experience is assumed.
 
 ## Lecture
 
@@ -19,7 +19,7 @@ We will have live lecture on Mondays, Tuesdays, Wednesdays, and Thursday from 6:
 
 ## Discussion Sections
 
-There will be biweekly, **in-person** discussion sections led by a TA. These sections will help reinforce the material learned in lecture and provide strong foundations for homework and exams.
+There will be biweekly, **in-person** discussion sections led by a TA. These sections will help reinforce the material learned in lecture and provide strong foundations for homework and exams. **Discussion attendance is not required, and you can attend any section you wish.**
 
 ## Office Hours
 
@@ -29,16 +29,14 @@ All office hours will be held in a hybrid format, available to students requirin
 
 ## Readings
 
-We may refer to textbook readings for further study, listed on the website.
+We may refer to textbook readings for further study, listed on the website (TBA).
 
 ## Exams
 
 There will be one midterm exam and a final exam. Exams are mandatory and synchronous (everyone takes them at the same time). A remote exam will be offered to those with a valid reason (at the exact same time as the synchronous exam).
 
-* The midterm is on Monday, March 13, 2023, 7–9pm PT.
-* The final exam is on Friday, May 12, 2023, 3–6pm PT.
-
-There will be **no alternate exams**.
+* The midterm is on TBD
+* The final exam is on TBD
 
 ## Homeworks
 
