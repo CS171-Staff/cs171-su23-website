@@ -88,7 +88,7 @@ agenda:
   - number: 9
     title: Hash Functions, One-way Functions and Implications, Random Oracle Model
   - number: 10
-    title: Hash Functions in Practice, Birthday Attacks, Rainbow Tables
+    title: Practical Hash Functions and Cryptographic Committment Schemes
   - number: 11
     title: Message Authentication Codes, Security and Construction of MACs
   - number: 12
