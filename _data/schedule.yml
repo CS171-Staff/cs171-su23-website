@@ -58,7 +58,7 @@ discussions:
   - name: Elliptic Curve Cryptography
   - name: Lattice Cryptography
   - name: LWE and Zero-Knowledge Proofs
-  - name: Non-Interactive Zero-Knowledge Proofs
+  - name: Homomorphic Encryption and Non-Interactive ZKP
   - name: No Discussion
   - name: No Discussion
 
