@@ -96,33 +96,31 @@ agenda:
   - number: 13
     title: Midterm
   - number: 14
-    title: Introduction to Asymmetric Encryption
+    title: Introduction to Asymmetric Encryption, RSA, Diffie-Hellman, ElGamal
   - number: 15
     title: Number Theory Foundations, Basic Group Theory, Hardness Assumptions
   - number: 16
-    title: RSA, Diffie-Hellman Key Exchange, and Public-Key Security Notions
-  - number: 17
-    title: Hybrid Encryption, ElGamal
-  - number: 18
     title: Digital Signatures (RSA, DSA), Hash-and-Sign Paradigm
-  - number: 19
+  - number: 17
     title: Elliptic Curve Cryptography
-  - number: 20
-    title: Elliptic Curve Digital Signatures, Pairing-based Cryptography
-  - number: 21
+  - number: 18
+    title: Elliptic Curve Digital Signatures, Pairing-Based Cryptography
+  - number: 19
     title: Post-Quantum Cryptography, Notions of Quantum Security
-  - number: 22
+  - number: 20
     title: Lattice Cryptography, Shortest- and Closest-Vector Problems
+  - number: 21
+    title: (Ring) Learning with Errors
+  - number: 22
+    title: Introduction to (Interactive) Zero-Knowledge Proofs
   - number: 23
-    title: Learning with Errors, Supersingular Elliptic Curve Cryptography
-  - number: 24
-    title: Introduction Zero-Knowledge Proofs
-  - number: 24
     title: Non-Interactive Zero-Knowledge Proofs
+  - number: 24
+    title: Homomorphic Encryption, Secure Multiparty Computation
   - number: 25
-    title: (Special Topics) Quantum Cryptography
+    title: (Special Topics) Threshold Encryption, Byzantine Fault Tolerance
   - number: 26
-    title: (Special Topics) Attribute-based Cryptography
+    title: (Special Topics) Quantum Cryptography
   - number: 27
     title: Wrap-Up and Potpourri
   - number: 28
