@@ -47,18 +47,17 @@ announcements:
 discussions:
   - name: No discussion
   - name: Classical Cryptography and Math Review
-  - name: Security Proofs and Indistinguishability
-  - name: Pseudorandomness and Block Ciphers
-  - name: DES and AES
-  - name: Hash Functions
+  - name: Security Proofs and PRGs
+  - name: PRFs and Block Ciphers
+  - name: SPNs and Linear/Differential Cryptanalysis
+  - name: Hash Functions and MACs
   - name: No Discussion
-  - name: Asymmetric Encryption
-  - name: RSA and DHKE
-  - name: Hybrid Encryption and Digital Signatures
+  - name: Abstract Algebra and Asymmetric Encryption
+  - name: Digital Signatures
   - name: Elliptic Curve Cryptography
-  - name: Lattice Cryptography
-  - name: LWE and Zero-Knowledge Proofs
-  - name: Homomorphic Encryption and Non-Interactive ZKP
+  - name: Lattice Cryptography, LWE, SIS
+  - name: Zero-Knowledge Proofs
+  - name: Homomorphic Encryption and SMP
   - name: No Discussion
   - name: No Discussion
 
@@ -74,11 +73,11 @@ agenda:
   - number: 2
     title: Math Review, Complexity Theory Fundamentals
   - number: 3
-    title: Modern Cryptography and Security Proofs
+    title: Modern Cryptography, Security Proofs, Indistinguishability Notions
   - number: 4
-    title: One-Time Pad, Perfect Secrecy, and Indistinguishability Notions
+    title: One-Time Pad, Perfect Secrecy, and Pseudorandom Generators
   - number: 5
-    title: Pseudorandom Functions/Generators, Pseudo-OTP, Stream Ciphers
+    title: Pseudorandom Functions and Pseudorandom Permutations
   - number: 6
     title: Block Ciphers, Modes of Operations, Multi-Encryption
   - number: 7
@@ -94,11 +93,11 @@ agenda:
   - number: 12
     title: Authenticated Encryption, AES-GCM
   - number: 13
-    title: Midterm
+    title: Midterm 
   - number: 14
-    title: Introduction to Asymmetric Encryption, RSA, Diffie-Hellman, ElGamal
+    title: Number Theory Foundations, Basic Abstract Algebra, Hardness Assumptions
   - number: 15
-    title: Number Theory Foundations, Basic Group Theory, Hardness Assumptions
+    title: Introduction to Asymmetric Encryption, RSA, Diffie-Hellman, ElGamal
   - number: 16
     title: Digital Signatures (RSA, DSA), Hash-and-Sign Paradigm
   - number: 17
@@ -110,15 +109,15 @@ agenda:
   - number: 20
     title: Lattice Cryptography, Shortest- and Closest-Vector Problems
   - number: 21
-    title: (Ring) Learning with Errors
+    title: Short Integer Solutions, (Ring) Learning with Errors
   - number: 22
-    title: Introduction to (Interactive) Zero-Knowledge Proofs
+    title: Interactive Zero-Knowledge Proofs
   - number: 23
     title: Non-Interactive Zero-Knowledge Proofs
   - number: 24
     title: Homomorphic Encryption, Secure Multiparty Computation
   - number: 25
-    title: (Special Topics) Threshold Encryption, Byzantine Fault Tolerance
+    title: (Special Topics) Threshold Encryption
   - number: 26
     title: (Special Topics) Quantum Cryptography
   - number: 27
