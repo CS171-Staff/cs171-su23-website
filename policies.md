@@ -11,7 +11,7 @@ order: 3
 
 ## Prerequisites
 
-Since cryptography is fundamentally reliant to both math and programming, we require familiar with discrete mathematics (CS 70) and basic programming experience (CS 61A or CS 61B level). A class in algorithms (CS 170) is helpful, but not required. No prior cryptography experience is assumed.
+Since cryptography is fundamentally reliant on both math and programming, we require familiar with discrete mathematics (CS 70) and basic programming experience (CS 61A or CS 61B level). A class in algorithms (CS 170) and abstract algebra (Math 113) are helpful, but not required. No prior cryptography experience is assumed.
 
 ## Lecture
 
