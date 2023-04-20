@@ -57,7 +57,7 @@ discussions:
   - name: Elliptic Curve Cryptography
   - name: Lattice Cryptography, LWE, SIS
   - name: Zero-Knowledge Proofs
-  - name: Homomorphic Encryption and SMP
+  - name: Homomorphic Encryption and SMPC
   - name: No Discussion
   - name: No Discussion
 
